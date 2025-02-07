@@ -1,0 +1,264 @@
+Protocol: tcp
+  Label 0: 39121
+  Label 1: 40825
+Protocol: udp
+  Label 0: 13922
+  Label 1: 49361
+Protocol: arp
+  Label 0: 2859
+Protocol: ospf
+  Label 0: 64
+  Label 1: 2531
+Protocol: icmp
+  Label 0: 15
+Protocol: igmp
+  Label 0: 18
+Protocol: rtp
+  Label 0: 1
+Protocol: ddp
+  Label 1: 100
+Protocol: ipv6-frag
+  Label 1: 100
+Protocol: cftp
+  Label 1: 100
+Protocol: wsn
+  Label 1: 100
+Protocol: pvp
+  Label 1: 100
+Protocol: wb-expak
+  Label 1: 100
+Protocol: mtp
+  Label 1: 100
+Protocol: pri-enc
+  Label 1: 100
+Protocol: sat-mon
+  Label 1: 100
+Protocol: cphb
+  Label 1: 100
+Protocol: sun-nd
+  Label 1: 201
+Protocol: iso-ip
+  Label 1: 100
+Protocol: xtp
+  Label 1: 100
+Protocol: il
+  Label 1: 100
+Protocol: unas
+  Label 1: 12084
+Protocol: mfe-nsp
+  Label 1: 100
+Protocol: 3pc
+  Label 1: 100
+Protocol: ipv6-route
+  Label 1: 100
+Protocol: idrp
+  Label 1: 100
+Protocol: bna
+  Label 1: 100
+Protocol: swipe
+  Label 1: 201
+Protocol: kryptolan
+  Label 1: 100
+Protocol: cpnx
+  Label 1: 100
+Protocol: rsvp
+  Label 1: 200
+Protocol: wb-mon
+  Label 1: 100
+Protocol: vmtp
+  Label 1: 100
+Protocol: ib
+  Label 1: 101
+Protocol: dgp
+  Label 1: 100
+Protocol: eigrp
+  Label 1: 100
+Protocol: ax.25
+  Label 1: 100
+Protocol: gmtp
+  Label 1: 100
+Protocol: pnni
+  Label 1: 100
+Protocol: sep
+  Label 1: 193
+Protocol: pgm
+  Label 1: 100
+Protocol: idpr-cmtp
+  Label 1: 100
+Protocol: zero
+  Label 1: 100
+Protocol: rvd
+  Label 1: 100
+Protocol: mobile
+  Label 1: 201
+Protocol: narp
+  Label 1: 100
+Protocol: fc
+  Label 1: 100
+Protocol: pipe
+  Label 1: 100
+Protocol: ipcomp
+  Label 1: 100
+Protocol: ipv6-no
+  Label 1: 100
+Protocol: sat-expak
+  Label 1: 100
+Protocol: ipv6-opts
+  Label 1: 100
+Protocol: snp
+  Label 1: 100
+Protocol: ipcv
+  Label 1: 100
+Protocol: br-sat-mon
+  Label 1: 100
+Protocol: ttp
+  Label 1: 100
+Protocol: tcf
+  Label 1: 100
+Protocol: nsfnet-igp
+  Label 1: 100
+Protocol: sprite-rpc
+  Label 1: 100
+Protocol: aes-sp3-d
+  Label 1: 100
+Protocol: sccopmce
+  Label 1: 100
+Protocol: sctp
+  Label 1: 1150
+Protocol: qnx
+  Label 1: 100
+Protocol: scps
+  Label 1: 100
+Protocol: etherip
+  Label 1: 100
+Protocol: aris
+  Label 1: 100
+Protocol: pim
+  Label 1: 201
+Protocol: compaq-peer
+  Label 1: 100
+Protocol: vrrp
+  Label 1: 100
+Protocol: iatp
+  Label 1: 100
+Protocol: stp
+  Label 1: 100
+Protocol: l2tp
+  Label 1: 100
+Protocol: srp
+  Label 1: 100
+Protocol: sm
+  Label 1: 100
+Protocol: isis
+  Label 1: 100
+Protocol: smp
+  Label 1: 100
+Protocol: fire
+  Label 1: 100
+Protocol: ptp
+  Label 1: 100
+Protocol: crtp
+  Label 1: 99
+Protocol: sps
+  Label 1: 100
+Protocol: merit-inp
+  Label 1: 100
+Protocol: idpr
+  Label 1: 100
+Protocol: skip
+  Label 1: 100
+Protocol: any
+  Label 1: 300
+Protocol: larp
+  Label 1: 100
+Protocol: ipip
+  Label 1: 100
+Protocol: micp
+  Label 1: 100
+Protocol: encap
+  Label 1: 100
+Protocol: ifmp
+  Label 1: 100
+Protocol: tp++
+  Label 1: 100
+Protocol: a/n
+  Label 1: 100
+Protocol: ipv6
+  Label 1: 201
+Protocol: i-nlsp
+  Label 1: 100
+Protocol: ipx-n-ip
+  Label 1: 100
+Protocol: sdrp
+  Label 1: 100
+Protocol: tlsp
+  Label 1: 100
+Protocol: gre
+  Label 1: 225
+Protocol: mhrp
+  Label 1: 100
+Protocol: ddx
+  Label 1: 100
+Protocol: ippc
+  Label 1: 100
+Protocol: visa
+  Label 1: 100
+Protocol: secure-vmtp
+  Label 1: 100
+Protocol: uti
+  Label 1: 100
+Protocol: vines
+  Label 1: 100
+Protocol: crudp
+  Label 1: 100
+Protocol: iplt
+  Label 1: 100
+Protocol: ggp
+  Label 1: 99
+Protocol: ip
+  Label 1: 99
+Protocol: ipnip
+  Label 1: 99
+Protocol: st2
+  Label 1: 99
+Protocol: argus
+  Label 1: 98
+Protocol: bbn-rcc
+  Label 1: 98
+Protocol: egp
+  Label 1: 98
+Protocol: emcon
+  Label 1: 99
+Protocol: igp
+  Label 1: 99
+Protocol: nvp
+  Label 1: 99
+Protocol: pup
+  Label 1: 99
+Protocol: xnet
+  Label 1: 99
+Protocol: chaos
+  Label 1: 99
+Protocol: mux
+  Label 1: 99
+Protocol: dcn
+  Label 1: 99
+Protocol: hmp
+  Label 1: 98
+Protocol: prm
+  Label 1: 99
+Protocol: trunk-1
+  Label 1: 99
+Protocol: xns-idp
+  Label 1: 99
+Protocol: leaf-1
+  Label 1: 99
+Protocol: leaf-2
+  Label 1: 99
+Protocol: rdp
+  Label 1: 98
+Protocol: iso-tp4
+  Label 1: 99
+Protocol: netblt
+  Label 1: 98
+Protocol: trunk-2
