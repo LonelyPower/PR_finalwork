@@ -230,30 +230,22 @@ ID & Type           & Description                                               
 \end{figure}
 
 \subsection{数据预处理}
-正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文。正文正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文。正文正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文，如表\ref{table:sanple}所示。
 
-\begin{table}[H]
-\caption{表题标题}
-\begin{center}\label{table:sanple}
+\subsubsection{数据完整度检验}
+由于数据量过大，为了提高数据处理效率，我们首先对数据集进行了数据完整性检验。如图\ref{fig:full}所示，
+service列出现超过半数的数据缺失，因此我们选择从数据集中移除该列数据，防止对后续的模型训练造成影响。
+\begin{figure}[htpb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{./png/full.png}
+  \caption{数据完整性}
+  \label{fig:full}
+\end{figure}
+\subsubsection{字符串标签列处理}
+在数据集中，有一些列的数据类型为字符串，例如proto、state等。
+为了方便后续的模型训练，我们选择独热编码将这些字符串标签列进行了数值化处理。
+\subsubsection{数据标准化}
 
-\begin{tabular}{|c|r|r|r|}
-\hline
-    & \multicolumn{1}{c|}{速度/(m.s-1)} & \multicolumn{1}{c|}{时间/s} & \multicolumn{1}{c|}{频率/kHz} \\ \hline
-第一次 &                                 &                           &                             \\ \hline
-第二次 &                                 &                           &                             \\ \hline
-第三次 &                                 &                           &                             \\ \hline
-\end{tabular}
-  
-\end{center}
-\end{table}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{算法三（300-500字）}
-正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文。正文正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文。正文正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文，见公式\ref{eq:sample}。
-
-\begin{equation}\label{eq:sample}
-P(f)=\frac{1}{T} \mid 2 \pi f A \exp \left[-\frac{(2 \pi f \sigma)^{2}}{2}\right]^{2}
-\end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -274,7 +266,9 @@ P(f)=\frac{1}{T} \mid 2 \pi f A \exp \left[-\frac{(2 \pi f \sigma)^{2}}{2}\right
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+\begin{equation}\label{eq:sample}
+  P(f)=\frac{1}{T} \mid 2 \pi f A \exp \left[-\frac{(2 \pi f \sigma)^{2}}{2}\right]^{2}
+  \end{equation}
 \section{实验描述}
 \subsection{实验数据和实验方案 （>500字）}
 正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文。正文正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文。正文正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文。
@@ -287,7 +281,20 @@ P(f)=\frac{1}{T} \mid 2 \pi f A \exp \left[-\frac{(2 \pi f \sigma)^{2}}{2}\right
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% \begin{table}[H]
+% \caption{表题标题}
+% \begin{center}\label{table:sanple}
 
+% \begin{tabular}{|c|r|r|r|}
+% \hline
+%     & \multicolumn{1}{c|}{速度/(m.s-1)} & \multicolumn{1}{c|}{时间/s} & \multicolumn{1}{c|}{频率/kHz} \\ \hline
+% 第一次 &                                 &                           &                             \\ \hline
+% 第二次 &                                 &                           &                             \\ \hline
+% 第三次 &                                 &                           &                             \\ \hline
+% \end{tabular}
+  
+% \end{center}
+% \end{table}
 \section{结论（500字）}
 正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文。正文正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文。正文正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文。
 
