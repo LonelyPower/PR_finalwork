@@ -1,0 +1,11 @@
+ID,Type,Description
+1,Normal,Natural transaction data.
+2,Analysis,An attack to invade web applications through emails, ports or web scripts.
+3,Backdoor,A covert attempt to circumvent normal authentication measures or other processes by allowing for secure remote access.
+4,DoS,A malicious attempt to disrupt the computer resources by attacking memory.
+5,Exploits,An instruction to take advantage of bugs or errors caused by unintentional behavior on the network.
+6,Fuzzers,An attack to crash the system by inputting a lot of random data.
+7,Generic,A technique to clash the block-cipher configuration by using hash functions.
+8,Reconnaissance,A probe to evade network security controls by collecting relevant information.
+9,Shellcode,A piece of code that is executed to exploit software vulnerabilities.
+10,Worms,A set of virus code which can add itself to computer system or other programs.
