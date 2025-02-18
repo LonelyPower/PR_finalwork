@@ -208,7 +208,7 @@ def process_data():
     # 读取特征重要性文件并提取前20个特征
     # feature_importance_df = pd.read_csv("../../data/gwo_feature_importance.csv")
     # feature_importance_df = pd.read_csv("../../data/xgb_gwo_feature.csv")
-    feature_importance_df = pd.read_csv("../../data/xgb_feature_importance.csv")
+    feature_importance_df = pd.read_csv("../../data/xgb_feature_importance4.csv")
     top_20_features = feature_importance_df["Feature"].head(20).tolist()
 
     # 确保测试集和训练集包含相同的特征
@@ -217,15 +217,15 @@ def process_data():
 
     # X_train = pd.get_dummies(X_train, columns=["proto", "state"])
     # X_test = pd.get_dummies(X_test, columns=["proto", "state"])
-    # X_train = pd.get_dummies(X_train, columns=["proto"])
-    # X_test = pd.get_dummies(X_test, columns=["proto"])   
+    X_train = pd.get_dummies(X_train, columns=["proto"])
+    X_test = pd.get_dummies(X_test, columns=["proto"])   
     # X_train, X_test = X_train.align(X_test, join='left', axis=1, fill_value=0)
 
     X_train = convert_column_to_binary(X_train, "proto", 1)
     X_test = convert_column_to_binary(X_test, "proto", 1)
 
-    X_train = convert_column_to_binary(X_train, "state", 2)
-    X_test = convert_column_to_binary(X_test, "state", 2)
+    # X_train = convert_column_to_binary(X_train, "state", 2)
+    # X_test = convert_column_to_binary(X_test, "state", 2)
 
     # encoder = LabelEncoder()
     # X_train = encoder.fit_transform(train_df['proto'])
@@ -234,9 +234,9 @@ def process_data():
     # print(X_test.columns)
 
     # 对所有特征进行均值化
-    scaler = StandardScaler()
-    X_train = scaler.fit_transform(X_train)
-    X_test = scaler.transform(X_test)
+    # scaler = StandardScaler()
+    # X_train = scaler.fit_transform(X_train)
+    # X_test = scaler.transform(X_test)
 
     # 二分类任务：预测label
     y_train_bin = train_df["label"].values
@@ -346,7 +346,7 @@ def predict(X_test, y_test_bin, model):
         predictions = torch.sign(outputs).cpu().numpy().flatten()
 
     accuracy = accuracy_score(y_test_bin.cpu().numpy(), predictions)
-
+    print(predictions)
     print(f"SVM Model Accuracy: {accuracy:.4f}")
     return accuracy
 

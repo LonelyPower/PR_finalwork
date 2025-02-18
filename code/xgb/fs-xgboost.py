@@ -4,7 +4,7 @@ import shap
 
 
 def process_data():
-    df = pd.read_csv("../data/UNSW_NB15_training-set.csv")
+    df = pd.read_csv("../../data/UNSW_NB15_training-set.csv")
 
     # 删除不需要的列
     df = df.drop(columns=["service", "id"])
@@ -39,7 +39,7 @@ def train_model(X, y):
     # 使用 DMatrix 训练模型
     model = xgb.train(params, dmatrix, num_boost_round=100)
 
-    model.save_model("../model/xgboost.json")
+    model.save_model("../../model/xgboost.json")
 
     return model
 
@@ -49,9 +49,9 @@ def explain_model_with_xgb():
     model = xgb.Booster()
 
     # 加载模型
-    model.load_model("../model/xgboost.json")
+    model.load_model("../../model/xgboost.json")
 
-    importance = model.get_score(importance_type="weight")
+    importance = model.get_score(importance_type="gain")
 
     # 将结果转换为 DataFrame 以便更易于查看
     xgb_df = pd.DataFrame(
@@ -69,7 +69,7 @@ def explain_model_with_shap(X):
     model = xgb.Booster()
 
     # 加载模型
-    model.load_model("../model/xgboost.json")
+    model.load_model("../../model/xgboost.json")
 
     # 打印特征重要性（按平均 SHAP 值排序）
 
@@ -113,7 +113,8 @@ final_importance_df["Normalized_XGBoost_Importance"] = final_importance_df["XGBo
 final_importance_df["Normalized_SHAP_Importance"] = final_importance_df["SHAP_Importance"] / final_importance_df["SHAP_Importance"].max()
 
 # 求和得到最终的特征重要性
-final_importance_df["Final_Importance"] = (final_importance_df["Normalized_XGBoost_Importance"] + final_importance_df["Normalized_SHAP_Importance"]) / 2
+final_importance_df["Final_Importance"] = final_importance_df["Normalized_SHAP_Importance"]
+# final_importance_df["Final_Importance"] = (final_importance_df["Normalized_XGBoost_Importance"] + final_importance_df["Normalized_SHAP_Importance"]) / 2
 
 # 按照最终的特征重要性进行排序
 final_importance_df = final_importance_df.sort_values(by="Final_Importance", ascending=False)
@@ -123,5 +124,5 @@ print(final_importance_df)
 # 假设 final_importance_df 是包含最终特征重要性的数据框
 # 将最终结果保存为 CSV 文件
 final_importance_df['Column_Number'] = final_importance_df.index
-final_importance_df.to_csv('xgb_feature_importance.csv', index=False)
+final_importance_df.to_csv('../../data/xgb_feature_importance4.csv', index=False)
 # select_feature()

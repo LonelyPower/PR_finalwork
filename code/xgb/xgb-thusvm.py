@@ -16,7 +16,10 @@ import pickle
 from itertools import product
 from sklearn.preprocessing import LabelEncoder
 from thundersvm import SVC
+from sklearn.metrics import accuracy_score, confusion_matrix, roc_curve, auc
 
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 def timer(func):
     def wrapper(*args, **kwargs):
@@ -254,7 +257,7 @@ def process_data():
     # 读取特征重要性文件并提取前20个特征
     # feature_importance_df = pd.read_csv("../../data/2.csv")
     # feature_importance_df = pd.read_csv("../../data/gwo_feature_importance.csv")
-    feature_importance_df = pd.read_csv("../../data/xgb_feature_importance.csv")
+    feature_importance_df = pd.read_csv("../../data/xgb_feature_importance4.csv")
     top_20_features = feature_importance_df["Feature"].head(20).tolist()
     print(top_20_features) 
     # 确保测试集和训练集包含相同的特征
@@ -288,6 +291,7 @@ def process_data():
     X_train = pd.get_dummies(X_train, columns=["proto"])
     X_test = pd.get_dummies(X_test, columns=["proto"])   
     X_train, X_test = X_train.align(X_test, join='left', axis=1, fill_value=0)
+
     # X_train.to_csv('X_train.csv',index=False)
     X_train = X_train + 1e-10  # 避免零值
     X_test = X_test + 1e-10
@@ -300,16 +304,27 @@ def process_data():
     # X_train = scaler.fit_transform(X_train)
     # X_test = scaler.transform(X_test)
 
-    y_train_bin = train_df["label"]
-    y_test_bin = test_df["label"]
+    # y_train_bin = train_df["label"]
+    # y_test_bin = test_df["label"]
+
+    # y_train_muti = train_df["attack_cat"]
+    # y_test_muti = test_df["attack_cat"]
 
 
+    encoder = LabelEncoder()
+
+    y_train_cat = encoder.fit_transform(train_df['attack_cat'])
+    y_test_cat = encoder.transform(test_df['attack_cat'])
     # encoder = LabelEncoder()
+    class_names = encoder.classes_
+    print(class_names)
     # y_train_multi = encoder.fit_transform(train_df['attack_cat'])
     # y_test_multi = encoder.transform(test_df['attack_cat'])
 
     # return X_train, X_test, y_train_multi, y_test_multi
-    return X_train, X_test, y_train_bin, y_test_bin
+    # return X_train, X_test, y_train_bin, y_test_bin
+    # return X_train, X_test, y_train_muti, y_test_muti
+    return X_train, X_test, y_train_cat, y_test_cat
 
 
 def process_orgindata():
@@ -329,7 +344,7 @@ def process_orgindata():
 
     X_train = train_df.drop(columns=['label', 'id', 'service', 'attack_cat'])  # 特征
     X_test = test_df.drop(columns=['label', 'id', 'service', 'attack_cat'])  # 特征
-
+    print(X_test.shape[1])
     # X_train = train_df.drop(columns=['label', 'id', 'service', 'attack_cat','state'])  # 特征
     # X_test = test_df.drop(columns=['label', 'id', 'service', 'attack_cat','state'])  # 
     # 特征 
@@ -356,31 +371,131 @@ def process_orgindata():
     # X_train = scaler.fit_transform(X_train)
     # X_test = scaler.transform(X_test)
 
-    # 二分类任务：预测label
-    y_train_bin = train_df["label"].values
-    y_test_bin = test_df["label"].values
+    encoder = LabelEncoder()
 
-    return X_train, X_test, y_train_bin, y_test_bin
+    y_train_cat = encoder.fit_transform(train_df['attack_cat'])
+    y_test_cat = encoder.transform(test_df['attack_cat'])
+    # 二分类任务：预测label
+    # y_train_bin = train_df["label"].values
+    # y_test_bin = test_df["label"].values
+
+    # return X_train, X_test, y_train_bin, y_test_bin
+    return X_train, X_test, y_train_cat, y_test_cat
 
 
 @timer
 def train_model(X_train, y_train_bin, param_grid):
     svm_model = SVC(C=param_grid['C'][0], gamma=param_grid['gamma'][0], kernel=param_grid['kernel'][0])
     svm_model.fit(X_train, y_train_bin)
+
+    # 保存模型
+    with open('../../model/42-xgb-thusvm-model.pkl', 'wb') as f:
+        pickle.dump(svm_model, f)
     return svm_model
 
 
 # @timer
-def predict(X_test, y_test_bin, model):
-    # 读取模型
 
+
+def predict(X_test, y_test_bin, model, save_path):
+    # 使用模型进行预测
     y_pred = model.predict(X_test)
+    
+    # 保存预测结果到 CSV 文件
+    df = pd.DataFrame({'True Labels': y_test_bin, 'Predicted Labels': y_pred})
+    df.to_csv(save_path, index=False)
+    # print(df)
+    # print("Saving predictions to:", save_path)
+
+    # 计算准确率
     accuracy = accuracy_score(y_test_bin, y_pred)
     print(f"SVM Model Accuracy: {accuracy:.4f}")
+    
+    # 返回预测结果
+    return y_test_bin, y_pred
+
+
+def load_predictions(file_path='predictions.csv'):
+    # 从文件加载预测结果
+    df = pd.read_csv(file_path)
+    y_test_bin = df['True Labels'].values
+    y_pred = df['Predicted Labels'].values
+    return y_test_bin, y_pred
+
+
+
+def predict1(X_test, y_test_bin, model):
+    # 使用模型进行预测
+    y_pred = model.predict(X_test)
+    
+    # 计算准确率
+    accuracy = accuracy_score(y_test_bin, y_pred)
+    print(f"SVM Model Accuracy: {accuracy:.4f}")
+    
+    # 保存预测结果
+    return y_test_bin, y_pred
+
+
+def evaluate(y_test_bin, y_pred):
+    # 计算混淆矩阵
+    cm = confusion_matrix(y_test_bin, y_pred)
+    print("Confusion Matrix:")
+    print(cm)
+    
+    # 计算假阳性率 (FPR) 和假阴性率 (FNR)
+    tn, fp, fn, tp = cm.ravel()  # 将混淆矩阵分解为四个部分
+    
+    # 假阳性率 (FPR)
+    accuracy=(tp+tn)/(tp+tn+fp+fn)
+    prc=tp/(tp+fp)
+    recall=tp/(tp+fn)
+    f1=2*prc*recall/(prc+recall)
+
+
+    fpr = fp / (fp + tn)
+    
+    # 假阴性率 (FNR)
+    fnr = fn / (fn + tp)
+    
+    # 误报率 (FAR)
+    far = fp / (fp + tp)
+
+    # 打印计算结果
+    print(f"Recall: {recall:.4f}")
+    print(f"Precision: {prc:.4f}")
+    print(f"F1 Score: {f1:.4f}")
+    print(f"False Positive Rate (FPR): {fpr:.4f}")
+    print(f"False Negative Rate (FNR): {fnr:.4f}")
+    print(f"False Alarm Rate (FAR): {far:.4f}")
+    
+    # 计算 ROC 曲线
+    fpr_roc, tpr_roc, thresholds_roc = roc_curve(y_test_bin, y_pred)
+    roc_auc = auc(fpr_roc, tpr_roc)
+    
+    # 绘制 ROC 曲线
+    plt.figure(figsize=(6, 5))
+    plt.plot(fpr_roc, tpr_roc, color='blue', lw=2, label=f'ROC curve (area = {roc_auc:.2f})')
+    plt.plot([0, 1], [0, 1], color='gray', lw=2, linestyle='--')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver Operating Characteristic (ROC) Curve')
+    plt.legend(loc='lower right')
+    plt.show()
+    
+    # 可选：可视化混淆矩阵
+    try:
+        plt.figure(figsize=(6, 5))
+        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=np.unique(y_test_bin), yticklabels=np.unique(y_test_bin))
+        plt.xlabel('Predicted')
+        plt.ylabel('True')
+        plt.title('Confusion Matrix')
+        plt.show()
+    except ImportError:
+        print("Seaborn or matplotlib not available for heatmap visualization.")
 
 # print("start")
 # X_train, X_test, y_train_bin, y_test_bin = process_orgindata()
-X_train, X_test, y_train_bin, y_test_bin = process_data()
+
 # print("process_data done")
 
 # param_grid = {
@@ -388,7 +503,8 @@ X_train, X_test, y_train_bin, y_test_bin = process_data()
 #     'gamma': [0.01, 0.1, 1],  # 核函数参数
 #     'kernel': ['rbf', 'linear']  # 核函数类型
 # }
-
+# X_train, X_test, y_train_bin, y_test_bin = process_orgindata()
+X_train, X_test, y_train_bin, y_test_bin = process_data()
 param_grid = {
     "C": [10],  # 正则化参数
     "gamma": [0.1],  # 核函数参数
@@ -396,11 +512,16 @@ param_grid = {
 }
 
 
-model = train_model(X_train, y_train_bin, param_grid)
+# model = train_model(X_train, y_train_bin, param_grid)
 # with open("../../model/xgb-thusvm-model.pkl", 'rb') as f:
 #     model = pickle.load(f)
-predict(X_test, y_test_bin, model)
+# 在首次运行时预测并保存结果
+# y_test_bin, y_pred = predict(X_test, y_test_bin, model, 'm-42-20predictions.csv')
 
+# 如果以后只想加载保存的预测结果
+# y_test_bin, y_pred = load_predictions('m-20predictions.csv')
+y_test_bin, y_pred = load_predictions('predictions.csv')
+evaluate(y_test_bin, y_pred)
 
 # return 1
 # qew(X_train, y_train_bin)

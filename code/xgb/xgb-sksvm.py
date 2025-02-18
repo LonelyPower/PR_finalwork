@@ -5,6 +5,7 @@ from sklearn.preprocessing import StandardScaler
 import pandas as pd
 import time
 import pickle
+import numpy as np
 
 def timer(func):
     def wrapper(*args, **kwargs):
@@ -55,7 +56,7 @@ def process_data():
     train_df = pd.read_csv('../../data/UNSW_NB15_training-set.csv')
 
     # 读取特征重要性文件并提取前20个特征
-    feature_importance_df = pd.read_csv('../../data/xgb_feature_importance.csv')
+    feature_importance_df = pd.read_csv('../../data/xgb_feature_importance3.csv')
     top_20_features = feature_importance_df['Feature'].head(20).tolist()
 
     # 确保测试集和训练集包含相同的特征
@@ -72,10 +73,15 @@ def process_data():
     X_train, X_test = X_train.align(X_test, join='left', axis=1, fill_value=0)
     # return
 
+    X_train = X_train + 1e-10  # 避免零值
+    X_test = X_test + 1e-10
+    # # return
+    X_train = np.log10(X_train)
+    X_test = np.log10(X_test)   
     # 对所有特征进行均值化
-    scaler = StandardScaler()
-    X_train = scaler.fit_transform(X_train)
-    X_test = scaler.transform(X_test)
+    # scaler = StandardScaler()
+    # X_train = scaler.fit_transform(X_train)
+    # X_test = scaler.transform(X_test)
 
     # 二分类任务：预测label
     y_train_bin = train_df['label']
@@ -134,10 +140,10 @@ X_train, X_test, y_train_bin, y_test_bin = process_data()
 
 
 di=[
-    {"C": [0.1], "gamma": [0.1], "kernel": ["rbf"]},
+    # {"C": [0.1], "gamma": [0.1], "kernel": ["rbf"]},
     # {"C": [0.1], "gamma": [1], "kernel": ["rbf"]},
     # {"C": [1], "gamma": [0.01], "kernel": ["rbf"]},
-    {"C": [1], "gamma": [0.1], "kernel": ["rbf"]},
+    # {"C": [1], "gamma": [0.1], "kernel": ["rbf"]},
     # {"C": [1], "gamma": [1], "kernel": ["rbf"]},
     {"C": [10], "gamma": [0.1], "kernel": ["rbf"]}
     # {"C": [10], "gamma": [1], "kernel": ["rbf"]}
