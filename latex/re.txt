@@ -1,0 +1,8 @@
+MDPI and ACS Style
+Almomani, O. A Feature Selection Model for Network Intrusion Detection System Based on PSO, GWO, FFA and GA Algorithms. Symmetry 2020, 12, 1046. https://doi.org/10.3390/sym12061046
+Kasongo S M, Sun Y. Performance analysis of intrusion detection systems using a feature selection method on the UNSW-NB15 dataset[J]. Journal of Big Data, 2020, 7(1): 105.
+Almomani O. A feature selection model for network intrusion detection system based on PSO, GWO, FFA and GA algorithms[J]. Symmetry, 2020, 12(6): 1046.
+Jing D, Chen H B. SVM based network intrusion detection for the UNSW-NB15 dataset[C]//2019 IEEE 13th international conference on ASIC (ASICON). IEEE, 2019: 1-4.
+Janarthanan T, Zargari S. Feature selection in UNSW-NB15 and KDDCUP'99 datasets[C]//2017 IEEE 26th international symposium on industrial electronics (ISIE). IEEE, 2017: 1881-1886.
+Moualla S, Khorzom K, Jafar A. Improving the Performance of Machine Learning‐Based Network Intrusion Detection Systems on the UNSW‐NB15 Dataset[J]. Computational Intelligence and Neuroscience, 2021, 2021(1): 5557577.
+Meftah S, Rachidi T, Assem N. Network based intrusion detection using the UNSW-NB15 dataset[J]. International Journal of Computing and Digital Systems, 2019, 8(5): 478-487.
