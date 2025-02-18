@@ -123,10 +123,11 @@ def evaluate(y_test_bin, y_pred):
     print(f"False Negative Rate (FNR): {fnr:.4f}")
     print(f"False Alarm Rate (FAR): {far:.4f}")
 
-# y_test_bin, y_pred = load_predictions('xgb-20predictions.csv')
+y_test_bin, y_pred = load_predictions('xgb-20predictions.csv')
 # y_test_bin, y_pred = load_predictions('42predictions.csv')
 # y_test_bin, y_pred = load_predictions('m-42predictions.csv')
-y_test_bin, y_pred = load_predictions('m-20predictions.csv')
+# y_test_bin, y_pred = load_predictions('m-20predictions.csv')
 class_names =['Analysis', 'Backdoor', 'DoS' ,'Exploits', 'Fuzzers' ,'Generic', 'Normal','Reconnaissance' ,'Shellcode', 'Worms']
-evaluate_multiclass(y_test_bin, y_pred, class_names)
+# evaluate_multiclass(y_test_bin, y_pred, class_names)
+evaluate(y_test_bin, y_pred)
 # evaluate(y_test_bin, y_pred)
