@@ -506,6 +506,7 @@ Sydney M. Kasongo  and Yanxia Sun
   \end{tabular}
 \end{table}
 
+<<<<<<< Updated upstream
 \section{结论}
 本研究基于具有现代化流量特征的UNSW-NB15数据集，提出了一种融合XGBoost与支持向量机（SVM）的网络入侵检测方案。
 通过构建基于XGBoost的特征选择模型，从原始数据集中筛选出20个关键特征维度
@@ -514,6 +515,34 @@ Sydney M. Kasongo  and Yanxia Sun
 结果显示：二分类准确率达85.81\%，F1值提升至88.28\%；多分类场景下准确率为69.86\%，
 F1值达到72.10\%，表明模型在平衡精确率与召回率方面具有显著优势。对比实验表明，
 本方案对新型攻击流量的检测准确率优于传统方法，具有较高的实用价值。
+=======
+\begin{table}[H]
+  \caption{多分类下性能对比}
+  \label{table:compare}
+  \centering
+  \begin{tabular}{lcc}
+    \toprule
+    特征子集          & Accuracy(\%) & FAR(\%) \ \midrule
+    XGB-SVM     &85.81    & 18.19  \\    
+    DT     & 85.56   & 15.78  \\    
+    LR     & 83.15   & 18.48  \\    
+    NB     & 82.07   & 18.56  \\    
+    ANN     & 81.34   & 21.13  \\    
+    EM clustering    & 78.47   & 23.79 \\\bottomrule 
+
+  \end{tabular}
+\end{table}
+
+
+
+\section{结论（500字）}
+正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文。正文正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文。正文正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{学习体会和建议（300字）}
+正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文。正文正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文。正文正文正文正文正文正文正文正文正文正文正文，正文正文正文正文正文正文正文正文正文正文。
+
+>>>>>>> Stashed changes
 %%%%%%%%%%%%%%%%%%%引用文献%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{thebibliography}{10}
   \bibitem{ref7}Chen T, Guestrin C. XGBoost: A scalable tree boosting system[C]//Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. ACM, 2016: 785–794.
